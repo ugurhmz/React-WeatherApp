@@ -8,7 +8,8 @@ class DecideSport extends Component {
         super(props)
 
         this.state = {
-            longitude:0
+            longitude:0,
+            error:''
         }
     }
 
@@ -25,13 +26,19 @@ class DecideSport extends Component {
                 },
                 (err) => {
                     console.log(err)
+                    this.setState({
+                       error:err.message
+                    })
                 }
             )
   
             return(
                 <div>
                     <h1>Longitude : {this.state.longitude}</h1>
-                    
+                    <p style={{
+                        color:'red',
+                        fontSize:'1rem'
+                    }}>{this.state.error}</p>
                 </div>
             ) 
     };
