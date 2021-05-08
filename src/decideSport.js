@@ -11,26 +11,42 @@ class DecideSport extends Component {
             longitude:0,
             error:''
         }
+
+        //to be  called in one go 
+        
+        window.navigator.geolocation.getCurrentPosition(
+            (position) => {
+
+                console.log(position)
+                this.setState({
+                    longitude:position.coords.longitude
+                })
+            },
+            (err) => {
+                console.log(err)
+                this.setState({
+                   error:err.message
+                })
+            }
+        )
     }
+
+    componentDidMount() {
+        console.log("componentDidMount worked")
+        
+    }
+
+    componentDidUpdate(){
+        console.log("componentDidUpdate worked...")
+        
+    }
+
+    
+
 
  //______________________________________ render () ______________
     render() {
 
-            window.navigator.geolocation.getCurrentPosition(
-                (position) => {
-
-                    console.log(position)
-                    this.setState({
-                        longitude:position.coords.longitude
-                    })
-                },
-                (err) => {
-                    console.log(err)
-                    this.setState({
-                       error:err.message
-                    })
-                }
-            )
 
             //obj dest.
             const { longitude, error } = this.state  
