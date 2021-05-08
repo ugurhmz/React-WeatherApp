@@ -8,7 +8,7 @@ class DecideSport extends Component {
         super(props)
 
         this.state = {
-            longitude:0,
+            latitude:null,
             error:''
         }
 
@@ -19,7 +19,7 @@ class DecideSport extends Component {
 
                 console.log(position)
                 this.setState({
-                    longitude:position.coords.longitude
+                    latitude:position.coords.latitude
                 })
             },
             (err) => {
@@ -41,25 +41,61 @@ class DecideSport extends Component {
         
     }
 
+    //clear state
+    componentWillUnmount(){
+        this.setState({
+            latitude:0
+        })
+    }
+
+
+//____________________________ Decide North South ______________________
+    decideDoSport(lat) {
+        const currentMonth = new Date().getMonth()
+
+        if(lat < 0) {
+            //güney
+            if(currentMonth > 3 && currentMonth < 8){
+                return "Go Ski "
+            }
+            else {
+                return "Go swimming..."
+            }
+
+        }else if( lat > 0){
+            //Kuzey
+
+            if(currentMonth > 8 || currentMonth < 3){
+                return "Go Ski "
+            }
+            else {
+                return "Go swimming..."
+            }
+            
+        }
+
+}
     
 
 
  //______________________________________ render () ______________
     render() {
 
-
             //obj dest.
-            const { longitude, error } = this.state  
+            const { latitude, error } = this.state  
+            if(latitude){
+                console.log(this.decideDoSport(latitude)) 
+            }
 
-            if(longitude !== 0 && !error) {
+            if(latitude !== 0 && !error) {
                 return(
                     <div>
-                        <h1>Longitude : {longitude}</h1>
+                        <h1>Latitude : {latitude}</h1>
                 
                      </div>
                 )
 
-            } else if(longitude === 0 && error) {
+            } else if(latitude === 0 && error) {
                     return(
                         <p style={{
                             color:'red',
