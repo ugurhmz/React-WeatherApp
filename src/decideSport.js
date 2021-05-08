@@ -31,16 +31,34 @@ class DecideSport extends Component {
                     })
                 }
             )
-  
+
+            //obj dest.
+            const { longitude, error } = this.state  
+
+            if(longitude !== 0 && !error) {
+                return(
+                    <div>
+                        <h1>Longitude : {longitude}</h1>
+                
+                     </div>
+                )
+
+            } else if(longitude === 0 && error) {
+                    return(
+                        <p style={{
+                            color:'red',
+                            fontSize:'1rem'
+                        }}>{error}</p>
+                    )
+            }
+
             return(
                 <div>
-                    <h1>Longitude : {this.state.longitude}</h1>
-                    <p style={{
-                        color:'red',
-                        fontSize:'1rem'
-                    }}>{this.state.error}</p>
+                    <h1>Loading.....</h1>
                 </div>
-            ) 
+
+            )          
+         
     };
   
 }
