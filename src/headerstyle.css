@@ -1,5 +1,30 @@
+body {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
 .headerstyle{
-    padding:1em 1em;
+   
     font-size:3rem;
-    border:1px solid black;
+    padding:0 1em;
+    
+}
+
+
+.myalign {
+    display : flex;
+    justify-content : center;
+    align-items: center;
+    height:100vh;
+    
+
+}
+
+.sun {
+    background-color:yellow;
+}
+
+.winter {
+    background-color:rgba(39, 39, 102, 0.055);
 }

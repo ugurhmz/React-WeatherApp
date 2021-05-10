@@ -7,9 +7,7 @@ class App extends React.Component {
     render() {
 
         return (
-            <div style={{
-                padding:'1em 3em'
-            }}>
+            <div>
                 <DecideSport/>
             </div>
             

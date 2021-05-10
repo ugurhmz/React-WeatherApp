@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import  faker  from 'faker'
 import "./headerstyle.css"
-
+import Loader from "./loader"
 class DecideSport extends Component {
 
 
@@ -12,8 +12,7 @@ class DecideSport extends Component {
         this.state = {
             latitude:null,
             error:'',
-            mytext:null,
-            iconName:null
+           
         }
 
        
@@ -54,19 +53,7 @@ class DecideSport extends Component {
 
 
    
-    summer = () => {
-        return {
-            mytext: "Go Swim",
-            iconName: 'sun'
-        }
-    }
-
-     winter = () => {
-        return {
-            mytext: "Go Ski",
-            iconName: 'snowflake'
-        }
-    }
+   
 
 
 //____________________________  decideDoSport() North South ______________________
@@ -77,10 +64,11 @@ class DecideSport extends Component {
 
         if(lat < 0) { //SOUTHERN
                 if(currentMonth > 3 && currentMonth < 8){
-                    return this.winter().mytext
+                    return ['Go Ski','winter']
+                    
                 }
                 else {
-                    return  this.summer().mytext
+                    return ["Go Swim","sun"]
                 }
 
         }
@@ -89,10 +77,12 @@ class DecideSport extends Component {
            
 
                 if(currentMonth > 8 || currentMonth < 3){
-                    return this.winter().mytext
+                    return ['Go Ski','winter']
+                 
                 }
                 else {
-                    return   this.summer().mytext
+                    
+                    return ["Go Swim","sun"]
                 }
                 
         }
@@ -109,14 +99,14 @@ class DecideSport extends Component {
 
             if(latitude  && !error) {
                 const sport = this.decideDoSport(latitude)
-
+                console.log("SPORT:"+sport)
                 return(
-                    <div className="headerstyle">    
+                    <div className={`${sport[1]} headerstyle myalign`}>    
                   
                        <h2 className="ui header" >
                             <img src={faker.image.avatar()} alt="avatar" />
                             <div className="content">
-                                 {faker.name.firstName()}  {sport} 
+                                 {faker.name.firstName()}  {sport[0]} 
                                  
                                 <div className="sub header">{faker.commerce.productDescription()}</div>
                             </div>
@@ -136,15 +126,14 @@ class DecideSport extends Component {
             }
 
             return(
-                <div>
-                    <h1>Loading.....</h1>
-                </div>
+               <Loader text="Loading my friend..."/>
 
             )          
          
     };
   
 }
+
 
 
 export default DecideSport
